@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElecPRO | Interactive Election Assistant</title>
+    <meta name="description" content="An interactive guide to help you understand the election process, timelines, and voting steps.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Navigation -->
+        <nav class="sidebar glass-panel">
+            <div class="logo">
+                <i class="ri-government-line logo-icon"></i>
+                <h1>ElecPRO</h1>
+            </div>
+            
+            <ul class="nav-links">
+                <li class="active"><a href="#assistant"><i class="ri-robot-2-line"></i> Assistant</a></li>
+                <li><a href="#timeline"><i class="ri-calendar-event-line"></i> Timeline</a></li>
+                <li><a href="#toolkit"><i class="ri-tools-line"></i> Toolkit</a></li>
+            </ul>
+            
+            <div class="election-countdown">
+                <p class="countdown-label">Days until Election</p>
+                <div class="countdown-number" id="countdown-days">--</div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Header -->
+            <header class="top-header">
+                <div class="header-titles">
+                    <h2>Your Personal Election Guide</h2>
+                    <p>Navigate the democratic process with confidence.</p>
+                </div>
+                <div class="theme-toggle" id="theme-toggle">
+                    <i class="ri-moon-line"></i>
+                </div>
+            </header>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                
+                <!-- Assistant Chat Area -->
+                <section id="assistant" class="chat-section glass-panel">
+                    <div class="section-header">
+                        <h3><i class="ri-sparkling-fill gradient-text"></i> ElecPRO Assistant</h3>
+                        <span class="status-badge online">Online</span>
+                    </div>
+                    
+                    <div class="chat-container" id="chat-container">
+                        <!-- Initial Greeting -->
+                        <div class="message bot-message fade-in-up">
+                            <div class="message-avatar">
+                                <i class="ri-robot-2-fill"></i>
+                            </div>
+                            <div class="message-content">
+                                <p>Hi there! 👋 I'm your ElecPRO Assistant. I can help you understand how to register, where to vote, and what to expect on Election Day.</p>
+                                <p>What would you like to know about first?</p>
+                                
+                                <div class="quick-replies">
+                                    <button class="quick-reply-btn" data-intent="registration">How do I register?</button>
+                                    <button class="quick-reply-btn" data-intent="timeline">What are the key dates?</button>
+                                    <button class="quick-reply-btn" data-intent="process">How does voting work?</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input-area">
+                        <input type="text" id="chat-input" placeholder="Type your question here...">
+                        <button id="send-btn" class="icon-btn primary-btn">
+                            <i class="ri-send-plane-fill"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Right Column: Timeline & Toolkit -->
+                <div class="right-column">
+                    
+                    <!-- Interactive Timeline -->
+                    <section id="timeline" class="timeline-section glass-panel">
+                        <div class="section-header">
+                            <h3><i class="ri-calendar-line"></i> 2024 Election Timeline</h3>
+                        </div>
+                        
+                        <div class="timeline-container">
+                            <div class="timeline-item past">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content" onclick="triggerChatIntent('timeline')" style="cursor: pointer;">
+                                    <h4>Voter Registration Deadline</h4>
+                                    <p class="timeline-date">October 7, 2024</p>
+                                    <p class="timeline-desc">Last day to register to vote in the general election.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item active">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content" onclick="triggerChatIntent('timeline')" style="cursor: pointer;">
+                                    <h4>Early Voting Begins</h4>
+                                    <p class="timeline-date">October 21, 2024</p>
+                                    <p class="timeline-desc">Polling locations open for early in-person voting.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content" onclick="triggerChatIntent('timeline')" style="cursor: pointer;">
+                                    <h4>Absentee Ballot Deadline</h4>
+                                    <p class="timeline-date">November 1, 2024</p>
+                                    <p class="timeline-desc">Last day to request a mail-in absentee ballot.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item highlight">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content" onclick="triggerChatIntent('timeline')" style="cursor: pointer;">
+                                    <h4>Election Day</h4>
+                                    <p class="timeline-date">November 5, 2024</p>
+                                    <p class="timeline-desc">General Election Day. Polls open 7AM - 7PM.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Toolkit Actions -->
+                    <section id="toolkit" class="toolkit-section">
+                        <div class="action-card glass-panel interactive-card" onclick="triggerChatIntent('registration')">
+                            <div class="card-icon blue-gradient">
+                                <i class="ri-id-card-line"></i>
+                            </div>
+                            <div class="card-info">
+                                <h4>Check Registration</h4>
+                                <p>Verify your voter status</p>
+                            </div>
+                            <i class="ri-arrow-right-line arrow-icon"></i>
+                        </div>
+                        
+                        <div class="action-card glass-panel interactive-card" onclick="triggerChatIntent('polling')">
+                            <div class="card-icon purple-gradient">
+                                <i class="ri-map-pin-line"></i>
+                            </div>
+                            <div class="card-info">
+                                <h4>Find Polling Place</h4>
+                                <p>Locate where to vote</p>
+                            </div>
+                            <i class="ri-arrow-right-line arrow-icon"></i>
+                        </div>
+                        
+                        <div class="action-card glass-panel interactive-card" onclick="triggerChatIntent('process')">
+                            <div class="card-icon orange-gradient">
+                                <i class="ri-ballot-line"></i>
+                            </div>
+                            <div class="card-info">
+                                <h4>Voting Options</h4>
+                                <p>Mail, early, or in-person</p>
+                            </div>
+                            <i class="ri-arrow-right-line arrow-icon"></i>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Background Elements for aesthetics -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-shape shape-3"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
